@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "crawler_cge"
+version = "1.0.2"
+description = "Scraping flooding data from CGE"
+readme = "README.md"
+license = "MIT"
+keywords = ["crawler cge", "docker image",]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+pyyaml = "6.0"
+webdriver_manager = "3.8.6"
+selenium = "4.9.1"
+pydantic = ">=1.9"
+pandas = "2.2.0"
+beautifulsoup4 = "4.12.3"
+pymongo = "*"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "3.8.0"
+pytest = "8.3.3"
+pytest-cov = "5.0.0"
+
+#REF: https://pre-commit.com/
+#REF: https://stefaniemolin.com/articles/devx/pre-commit/setup-guide/
+#REF: https://medium.com/@pijpijani/smarter-commits-with-git-pre-commit-hooks-9c7bb3f699bf
+#REF: https://github.com/astral-sh/ruff/blob/2e9e96338e89712aefd1cf11918f7d2fca3a8e2d/README.md?plain=1#L294
+[tool.ruff]
+line-length = 88
+select = [
+    "C",  # mccabe rules
+    "F",  # pyflakes rules
+    "E",  # pycodestyle error rules
+    "W",  # pycodestyle warning rules
+    "B",  # flake8-bugbear rules
+    "I",  # isort rules
+]
+ignore = [
+    "C901",  # max-complexity-10
+    "E501",  # line-too-long
+]
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "single"
+
+[tool.numpydoc_validation]
+checks = [
+    "all",  # report on all checks
+    "ES01", # but don't require an extended summary
+    "EX01", # or examples
+    "SA01", # or a see also section
+    "SS06", # and don't require the summary to fit on one line
+]
+exclude = [  # don't report on checks for these
+    '\\.__init__$',
+    '\\.__repr__$',
+    '\\.__str__$',
+]
+override_SS05 = [  # allow docstrings to start with these words
+    '^Process ',
+    '^Assess ',
+    '^Access ',
+]
